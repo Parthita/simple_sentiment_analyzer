@@ -1,10 +1,9 @@
-# Multi-Source Sentiment Analysis Dashboard
+# News Sentiment Analysis Dashboard
 
-A sentiment analysis dashboard that analyzes sentiment across Twitter and news sources using VADER sentiment analysis.
+A sentiment analysis dashboard that analyzes sentiment from news sources using VADER sentiment analysis.
 
 ## Features
 
-- **Twitter Data**: Fetches recent tweets (with mock data fallback)
 - **News Data**: Fetches news headlines from GNews
 - **Sentiment Analysis**: Uses VADER SentimentIntensityAnalyzer
 - **Visualizations**: Interactive charts and word clouds
@@ -13,7 +12,7 @@ A sentiment analysis dashboard that analyzes sentiment across Twitter and news s
 ## Usage
 
 1. Enter a search query in the sidebar
-2. Adjust parameters (Twitter posts, News articles)
+2. Adjust parameters (News articles)
 3. Click "Analyze Sentiment" to start
 4. Explore results and export data
 
@@ -26,7 +25,6 @@ A sentiment analysis dashboard that analyzes sentiment across Twitter and news s
 - nltk>=3.8.1
 - pandas>=1.5.0
 - gnews>=0.4.2
-- snscrape>=0.6.2
 
 ## Deployment
 

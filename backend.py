@@ -12,53 +12,6 @@ def download_nltk_data():
     except LookupError:
         nltk.download('vader_lexicon')
 
-def fetch_twitter(query: str, limit: int = 50) -> List[Dict[str, Any]]:
-    tweets = []
-    
-    try:
-        import snscrape.modules.twitter as sntwitter
-        
-        scraper = sntwitter.TwitterSearchScraper(f"{query} lang:en")
-        
-        for i, tweet in enumerate(scraper.get_items()):
-            if i >= limit:
-                break
-                
-            tweets.append({
-                "source": "Twitter",
-                "text": tweet.rawContent,
-                "timestamp": tweet.date.isoformat() if tweet.date else None,
-                "url": tweet.url,
-                "user": tweet.user.username if tweet.user else None
-            })
-            
-    except Exception as e:
-        mock_tweets = [
-            {
-                "source": "Twitter",
-                "text": f"Just got the new {query}! Amazing features and great performance. Love it!",
-                "timestamp": datetime.now().isoformat(),
-                "url": "https://twitter.com/mock/status/1",
-                "user": "mock_user1"
-            },
-            {
-                "source": "Twitter", 
-                "text": f"Not impressed with {query}. Battery life is terrible and it's overpriced.",
-                "timestamp": datetime.now().isoformat(),
-                "url": "https://twitter.com/mock/status/2",
-                "user": "mock_user2"
-            },
-            {
-                "source": "Twitter",
-                "text": f"{query} is okay, nothing special but gets the job done.",
-                "timestamp": datetime.now().isoformat(),
-                "url": "https://twitter.com/mock/status/3",
-                "user": "mock_user3"
-            }
-        ]
-        return mock_tweets[:limit]
-        
-    return tweets
 
 def fetch_news(query: str, limit: int = 20) -> List[Dict[str, Any]]:
     news_articles = []
@@ -172,15 +125,12 @@ def aggregate_results(data: List[Dict[str, Any]]) -> Dict[str, Any]:
 def main():
     query = "iPhone"
     
-    twitter_data = fetch_twitter(query, limit=30)
-    news_data = fetch_news(query, limit=15)
+    news_data = fetch_news(query, limit=20)
     
-    all_data = twitter_data + news_data
-    
-    if not all_data:
+    if not news_data:
         return
     
-    analyzed_data = analyze_sentiment(all_data)
+    analyzed_data = analyze_sentiment(news_data)
     results = aggregate_results(analyzed_data)
     
     print("SENTIMENT ANALYSIS RESULTS")

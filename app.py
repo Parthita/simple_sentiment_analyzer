@@ -11,7 +11,7 @@ import re
 from typing import List, Dict, Any
 import numpy as np
 
-from backend import fetch_twitter, fetch_news, analyze_sentiment, aggregate_results
+from backend import fetch_news, analyze_sentiment, aggregate_results
 
 st.set_page_config(
     page_title="Multi-Source Sentiment Dashboard",
@@ -141,8 +141,7 @@ def main():
         )
         
         st.subheader("Parameters")
-        twitter_limit = st.slider("Twitter Posts", 5, 100, 30)
-        news_limit = st.slider("News Articles", 5, 50, 15)
+        news_limit = st.slider("News Articles", 5, 50, 20)
         
         analyze_btn = st.button("Analyze Sentiment", type="primary", use_container_width=True)
         
@@ -152,24 +151,15 @@ def main():
     
     if analyze_btn and query:
         with st.spinner("Analyzing sentiment... This may take a moment."):
-            col1, col2 = st.columns(2)
+            st.info("Fetching news data...")
+            news_data = fetch_news(query, news_limit)
             
-            with col1:
-                st.info("Fetching Twitter data...")
-                twitter_data = fetch_twitter(query, twitter_limit)
-            
-            with col2:
-                st.info("Fetching news data...")
-                news_data = fetch_news(query, news_limit)
-            
-            all_data = twitter_data + news_data
-            
-            if not all_data:
+            if not news_data:
                 st.error("No data found. Please try a different query.")
                 return
             
             st.info("Analyzing sentiment...")
-            analyzed_data = analyze_sentiment(all_data)
+            analyzed_data = analyze_sentiment(news_data)
             
             st.info("Aggregating results...")
             aggregated_results = aggregate_results(analyzed_data)
@@ -345,15 +335,14 @@ def main():
         
         This dashboard helps you analyze sentiment across multiple sources:
         
-        - **Twitter**: Real-time social media sentiment
-        - **News**: Media coverage sentiment
+        - **News**: Media coverage sentiment analysis
         - **Analytics**: Comprehensive sentiment breakdown
         - **Word Clouds**: Visual text analysis
         
         ### Getting Started
         
         1. Enter a search query in the sidebar
-        2. Adjust the parameters (Twitter posts, News articles)
+        2. Adjust the parameters (News articles)
         3. Click "Analyze Sentiment" to start
         4. Explore the results in the dashboard
         

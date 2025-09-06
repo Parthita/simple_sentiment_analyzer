@@ -1,4 +1,3 @@
-snscrape>=0.6.2
 gnews>=0.4.2
 nltk>=3.8.1
 pandas>=1.5.0
