@@ -1,0 +1,13 @@
+snscrape>=0.6.2
+gnews>=0.4.2
+nltk>=3.8.1
+pandas>=1.5.0
+streamlit>=1.28.0
+plotly>=5.15.0
+matplotlib>=3.7.0
+wordcloud>=1.9.0
+numpy>=1.24.0
+requests>=2.27.0
+beautifulsoup4>=4.12.0
+lxml>=4.9.0
+feedparser>=6.0.0
