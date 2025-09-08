@@ -355,11 +355,7 @@ def main():
         
       
         cols = st.columns(3)
-        for i, query in enumerate(example_queries):
-            with cols[i % 3]:
-                if st.button(f"{query}", key=f"example_{i}"):
-                    st.session_state.example_query = query
-                    st.rerun()
+        
 
 if __name__ == "__main__":
     main()
