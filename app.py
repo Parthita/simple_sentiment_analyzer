@@ -353,11 +353,7 @@ def main():
         - Export your data for further analysis
         """)
         
-        example_queries = [
-            "iPhone", "Tesla", "Bitcoin", "Climate Change", "Artificial Intelligence",
-            "Electric Vehicles", "Renewable Energy", "Space Exploration", "COVID-19"
-        ]
-        
+      
         cols = st.columns(3)
         for i, query in enumerate(example_queries):
             with cols[i % 3]:
