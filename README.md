@@ -15,7 +15,6 @@ Screenshots:
 
 ![Dashboard Home](pictures/20250908001435)
 ![Analysis Results](pictures/20250908001509)
-![Word Cloud](pictures/20250908001516)
 ![Time Series](pictures/20250908001522)
 ![Details Table](pictures/20250908001525)
 
